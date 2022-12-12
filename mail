@@ -1,0 +1,34 @@
+import datetime
+
+def manage_chronic_illness(patient_data, care_plan):
+  # Create a care plan for managing a chronic illness
+
+  # Get current date and time
+  now = datetime.datetime.now()
+
+  # Create a list to hold the care plan tasks and their due dates
+  tasks = []
+
+  # Iterate over the care plan tasks and add them to the tasks list
+  for task in care_plan['tasks']:
+    # Add the task description and due date to the tasks list
+    tasks.append({'description': task['description'], 'due_date': now + task['due_date_offset']})
+
+  # Return the tasks list
+  return tasks
+
+# Example usage
+patient_data = {...}  # Patient data goes here
+care_plan = {
+  'tasks': [
+    {'description': 'Take medication', 'due_date_offset': datetime.timedelta(hours=12)},
+    {'description': 'Check blood sugar', 'due_date_offset': datetime.timedelta(hours=24)},
+    {'description': 'Schedule doctor appointment', 'due_date_offset': datetime.timedelta(days=7)}
+  ]
+}
+
+tasks = manage_chronic_illness(patient_data, care_plan)
+
+# Output: [{'description': 'Take medication', 'due_date': datetime.datetime(..., 12, 0)},
+#          {'description': 'Check blood sugar', 'due_date': datetime.datetime(..., 24, 0)},
+#          {'description': 'Schedule doctor appointment', 'due_date': datetime.datetime(..., 7, 0)}]
